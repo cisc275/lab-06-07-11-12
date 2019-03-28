@@ -1,4 +1,4 @@
-package lab4;
+
 //Anna Bortle
 public class Model {
 	

@@ -1,7 +1,10 @@
-package lab4;
 
+
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
 
 /**
  * Do not modify this file without permission from your TA.
@@ -19,13 +22,13 @@ public class Controller{
 	
         //run the simulation
 	public void start(){
-		for(int i = 0; i < 5000; i++){
-			if (Model.getMovement()) {
-				//increment the x and y coordinates, alter direction if necessary
-				model.updateLocationAndDirection();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				Timer t = new Timer(view.drawDelay, view.drawAction);
+				t.start();
 			}
-			view.update(model.getX(), model.getY(), model.getDirect());
-			}
+		});
+		
 			
 		}
 		

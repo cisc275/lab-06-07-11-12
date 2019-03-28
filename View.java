@@ -1,4 +1,4 @@
-package lab4;
+
 //Anna Bortle
 
 import java.awt.Button;
@@ -11,11 +11,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
+import javax.swing.AbstractAction;
 
 public class View extends JPanel implements ActionListener{
 	
@@ -26,10 +26,13 @@ public class View extends JPanel implements ActionListener{
 	
 	final static int frameWidth = 600;
 	final static int frameHeight = 400;
+	final static int drawDelay =60;
 	//final static int frameStartSize = 800;
 	//final int drawDelay = 30; //msec
 	final static int imgWidth = 165;
 	final static int imgHeight = 165;
+	
+	Action drawAction;
 	
 	JFrame frame;
 	boolean flag = true;
@@ -73,7 +76,11 @@ public class View extends JPanel implements ActionListener{
 			}
 			j++;
 		}
-		
+		drawAction = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				drawPanel.repaint();
+			}
+		};
 		
 		
 		b = new Button("Click");
