@@ -17,8 +17,8 @@ public class View extends JPanel{
 	
 	final int frameCount = 10;
 	int picNum = 0;
-	BufferedImage[][] pics;
-	
+	BufferedImage[][] forwardpics;
+	BufferedImage[][] idlepics;
 	final static int frameWidth = 500;
 	final static int frameHeight = 300;
 	final static int imgWidth = 165;
@@ -27,34 +27,44 @@ public class View extends JPanel{
 	JFrame frame;
 	boolean flag = true;
 	
-	/**
-	 * View: Contains everything about graphics and images
-	 * Know size of world, which images to load etc
-	 *
-	 * has methods to
-	 * provide boundaries
-	 * use proper images for direction
-	 * load images for all direction (an image should only be loaded once!!! why?)
-	 **/
-	
-	
 	public View() {
 	
 		Direction[]	directions = new Direction[]{Direction.NORTH, Direction.NORTHEAST, Direction.EAST, Direction.SOUTHEAST
 				, Direction.SOUTH, Direction.SOUTHWEST, Direction.WEST, Direction.NORTHWEST};
+		Direction[]	idle1 = new Direction[]{Direction.EAST,Direction.WEST, Direction.NORTH, Direction.SOUTH};
+		Direction[]	idle2 = new Direction[]{Direction.NORTHWEST, Direction.NORTHEAST, Direction.SOUTHWEST, Direction.SOUTHEAST};
 			
 		//load in buffered images into 2d array
-		pics = new BufferedImage[directions.length][frameCount];
+		forwardpics = new BufferedImage[directions.length][frameCount];
 		for (Direction d: directions) {
-			BufferedImage img = createImage(d.getName());
+			BufferedImage img = createForwardImage(d.getName());
 			for(int i = 0; i < frameCount; i++) {
-				pics[d.ordinal()][i] = img.getSubimage(getImageWidth()*i, 0, getImageWidth(), getImageHeight());
+				forwardpics[d.ordinal()][i] = img.getSubimage(getImageWidth()*i, 0, getImageWidth(), getImageHeight());
 			}
 		}
+		idlepics = new BufferedImage[directions.length][4];
+		int j = 0;
+		for (Direction d: idle1) {
+			BufferedImage img = createIdleImage("ewns");
+			for(int i = 0; i < 4; i++) {
+				idlepics[d.ordinal()][i] = img.getSubimage(getImageWidth()*i, getImageHeight()*j, getImageWidth(), getImageHeight());
+			}
+			j++;
+		}
+		j = 0;
+		
+		for (Direction d: idle2) {
+			BufferedImage img = createIdleImage("nwneswse");
+			for(int i = 0; i < 4; i++) {
+				idlepics[d.ordinal()][i] = img.getSubimage(getImageWidth()*i, getImageHeight()*j, getImageWidth(), getImageHeight());
+			}
+			j++;
+		}
+		j = 0;
 	}
 		
 	//Read image from file and return
-	private BufferedImage createImage(String direction){
+	private BufferedImage createForwardImage(String direction){
 		BufferedImage bufferedImage;
 		try {
 			bufferedImage = ImageIO.read(new File("images/orc/orc_forward_"+direction+".png"));
@@ -64,7 +74,17 @@ public class View extends JPanel{
 		}
 		return null;
 	}
-
+	
+	private BufferedImage createIdleImage(String direction){
+		BufferedImage bufferedImage;
+		try {
+			bufferedImage = ImageIO.read(new File("images/orc/orc_idle_"+direction+".png"));
+			return bufferedImage;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public int getWidth() {
 		return frameWidth;
@@ -104,7 +124,7 @@ public class View extends JPanel{
 	@Override
 	public void paint(Graphics g) {
 		picNum = (picNum + 1) % frameCount;
-		g.drawImage(pics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
+		g.drawImage(forwardpics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
 	}
 		
 	
