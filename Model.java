@@ -1,17 +1,19 @@
-
+package temp.java;
+//TEAM 11-12
+//B.Azueta, A.Bortle, H.Bridge, K.Chan, C.Lemus
 
 public class Model {
 	
 	static int xloc = 0;
 	static int yloc = 0;
-	int xIncr = 8;
-	int yIncr = 2;
-	int frameWidth;
-	int frameHeight;
-	int imgWidth;
-	int imgHeight;
+	static int xIncr = 4;
+	static int yIncr = 1;
+	static int frameWidth;
+	static int frameHeight;
+	static int imgWidth;
+	static int imgHeight;
 	public static Direction d;
-	public static boolean movementFlag;
+	public static boolean movementFlag; //moving = true, idle = false
 
 	
 	//constructor
@@ -24,9 +26,9 @@ public class Model {
 		movementFlag = true;
 	}
 
-	public void updateLocationAndDirection() {
+	public static void updateLocationAndDirection() {
 		
-		//test for collisions
+		//test for collisions, change direction if needed
 		if (xloc + imgWidth > frameWidth) { //hitting right boundary
 			xIncr = -xIncr;
 			switch (d){		
@@ -43,7 +45,6 @@ public class Model {
 				break;
 			}
 		}
-		
 		if (xloc < 0) {	//hitting left boundary
 			xIncr = -xIncr;
 			switch (d) {
@@ -60,7 +61,6 @@ public class Model {
 				break;
 			}
 		}
-		
 		if (yloc < 0 ) {	//hitting top boundary
 			yIncr = -yIncr;
 			switch (d) {
@@ -77,7 +77,6 @@ public class Model {
 				break;
 			}
 		}
-		
 		if (yloc + imgHeight > frameHeight) {		//hitting bottom boundary
 			yIncr = -yIncr;
 			switch (d) {
@@ -101,6 +100,10 @@ public class Model {
 	}
 
 	public static int getX() {
+		if (movementFlag) {
+			//only update location/direction if orc is moving
+			updateLocationAndDirection(); 
+		}
 		return xloc;
 	}
 	public static int getY() {
