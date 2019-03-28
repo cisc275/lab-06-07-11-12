@@ -1,5 +1,5 @@
 
-//Anna Bortle
+
 public class Model {
 	
 	static int xloc = 0;
