@@ -10,7 +10,9 @@ public class Model {
 	int frameHeight;
 	int imgWidth;
 	int imgHeight;
-	static Direction d;
+	public static Direction d;
+	public static boolean movementFlag;
+
 	
 	//constructor
 	public Model(int width, int height, int imageWidth, int imageHeight) {
@@ -19,6 +21,7 @@ public class Model {
 		imgWidth = imageWidth;
 		imgHeight = imageHeight;
 		d = Direction.SOUTHEAST;	//starting direction
+		movementFlag = true;
 	}
 
 	public void updateLocationAndDirection() {
@@ -106,5 +109,8 @@ public class Model {
 
 	public static Direction getDirect() {
 		return d;
+	}
+	public static boolean getMovement() {
+		return movementFlag;
 	}
 }
