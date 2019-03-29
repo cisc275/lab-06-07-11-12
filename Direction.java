@@ -1,6 +1,4 @@
-package temp.java;
-//TEAM 11-12
-//B.Azueta, A.Bortle, H.Bridge, K.Chan, C.Lemus
+package lab4;
 
 public enum Direction {
 
