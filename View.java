@@ -181,14 +181,24 @@ public class View extends JFrame {
 			
 			
 			if (Model.getMovement()) {
-				picNum = (picNum + 1) % frameCount;
-				g.drawImage(forwardpics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
-				
-			}		
+				if (Model.jumpFlag) {
+					picNum = (picNum + 1) % 8;
+					g.drawImage(jumppics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
+				}
+				else{
+					picNum = (picNum + 1) % frameCount;
+					g.drawImage(forwardpics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
+				}
+			}
+			
 			if (!Model.getMovement()) {
 				if (Model.fireFlag) {
 					picNum = (picNum + 1) % 4;
 					g.drawImage(firepics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
+				}
+				else if (Model.jumpFlag) {
+					picNum = (picNum + 1) % 8;
+					g.drawImage(jumppics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
 				}
 				else {
 					picNum = (picNum + 1) % 4;

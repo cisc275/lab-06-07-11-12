@@ -13,6 +13,7 @@ public class Model {
 	public static Direction d;
 	public static boolean movementFlag;
 	public static boolean fireFlag;
+	public static boolean jumpFlag;
 
 	
 	//constructor
