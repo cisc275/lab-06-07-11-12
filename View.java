@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 		int picNum = 0;
 		BufferedImage[][] forwardpics;
 		BufferedImage[][] idlepics;
+		BufferedImage[][] jumppics;
+		BufferedImage[][] firepics;
 		
 		final static int frameWidth = 800;
 		final static int frameHeight = 800;
@@ -52,6 +54,14 @@ import javax.swing.JPanel;
 				BufferedImage img = createForwardImage(d.getName());
 				for(int i = 0; i < frameCount; i++) {
 					forwardpics[d.ordinal()][i] = img.getSubimage(getImageWidth()*i, 0, getImageWidth(), getImageHeight());
+				}
+				BufferedImage img2 = createFireImage(d.getName());
+				for(int i = 0; i < 4; i++) {
+					firepics[d.ordinal()][i] = img2.getSubimage(getImageWidth()*i, 0, getImageWidth(), getImageHeight());
+				}
+				BufferedImage img3 = createJumpImage(d.getName());
+				for(int i = 0; i < 8; i++) {
+					jumppics[d.ordinal()][i] = img3.getSubimage(getImageWidth()*i, 0, getImageWidth(), getImageHeight());
 				}
 			}
 			//idle images
@@ -105,7 +115,26 @@ import javax.swing.JPanel;
 			}
 			return null;
 		}
-		
+		private BufferedImage createFireImage(String direction){
+			BufferedImage bufferedImage;
+			try {
+				bufferedImage = ImageIO.read(new File("images/orc/orc_fire_"+direction+".png"));
+				return bufferedImage;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		private BufferedImage createJumpImage(String direction){
+			BufferedImage bufferedImage;
+			try {
+				bufferedImage = ImageIO.read(new File("images/orc/orc_jump_"+direction+".png"));
+				return bufferedImage;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 		private BufferedImage createIdleImage(String direction){
 			BufferedImage bufferedImage;
 			try {
