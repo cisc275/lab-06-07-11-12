@@ -177,15 +177,23 @@ public class View extends JFrame {
 		
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			g.setColor(Color.gray);		
+			g.setColor(Color.gray);
+			
+			
 			if (Model.getMovement()) {
-					picNum = (picNum + 1) % frameCount;
-					g.drawImage(forwardpics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
-				}
+				picNum = (picNum + 1) % frameCount;
+				g.drawImage(forwardpics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
+				
+			}		
 			if (!Model.getMovement()) {
+				if (Model.fireFlag) {
+					picNum = (picNum + 1) % 4;
+					g.drawImage(firepics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
+				}
+				else {
 					picNum = (picNum + 1) % 4;
 					g.drawImage(idlepics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
-				
+				}
 			}
 		    drawPanel.requestFocus();
 		}

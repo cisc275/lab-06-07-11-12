@@ -51,9 +51,11 @@ public class Controller implements ActionListener , KeyListener {
 		
 		if(e.getKeyCode() == 70 ) {
 			System.out.println("F Key Pressed");
+			model.fireFlag = true;
+			model.movementFlag = false;
 		}
 		if (e.getKeyCode() == 74) {
-			System.out.println("J Key Pressed");
+			System.out.println("J Key Released");
 		}
 		
 	}
@@ -63,6 +65,10 @@ public class Controller implements ActionListener , KeyListener {
 		
 		if (e.getKeyCode() == 70) {
 			System.out.println("F Key Released");
+			model.fireFlag = false;
+			if (!view.buttFlag) {
+				model.movementFlag = true;
+			}
 		}
 		if (e.getKeyCode() == 74) {
 			System.out.println("J Key Released");

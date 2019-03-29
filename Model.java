@@ -12,6 +12,7 @@ public class Model {
 	static int imgHeight;
 	public static Direction d;
 	public static boolean movementFlag;
+	public static boolean fireFlag;
 
 	
 	//constructor
@@ -101,13 +102,13 @@ public class Model {
 	}
 
 	public static int getX() {
-		if (movementFlag) {
+		if (movementFlag && !fireFlag) {
 			updateLocationAndDirection();
 		}
 		return xloc;
 	}
 	public static int getY() {
-		if (movementFlag) {
+		if (movementFlag && !fireFlag) {
 			updateLocationAndDirection();
 		}
 		return yloc;
