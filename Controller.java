@@ -7,10 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
-
-/**
- * Do not modify this file without permission from your TA.
- **/
 public class Controller implements ActionListener , KeyListener {
 	private View view;
 	private Model model;
@@ -43,19 +39,19 @@ public class Controller implements ActionListener , KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		model.movementFlag = !model.movementFlag;
-		view.buttFlag = !view.buttFlag;
+		Model.buttonFlag = !Model.buttonFlag;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
 		if(e.getKeyCode() == 70 ) {
-			System.out.println("F Key Pressed");
+			//System.out.println("F Key Pressed"); //uncomment to test to see is F key is being pressed
 			model.fireFlag = true;
 			model.movementFlag = false;
 		}
 		if (e.getKeyCode() == 74) {
-			System.out.println("J Key Pressed");
+			//System.out.println("J Key Pressed"); //uncomment to test to see is J key is being pressed
 			model.jumpFlag = true;
 		}
 		
@@ -65,15 +61,18 @@ public class Controller implements ActionListener , KeyListener {
 	public void keyReleased(KeyEvent e) {
 		
 		if (e.getKeyCode() == 70) {
-			System.out.println("F Key Released");
+			//System.out.println("F Key Released"); //uncomment to test to see is F key is being released
 			model.fireFlag = false;
-			if (!view.buttFlag) {
+			if (!Model.buttonFlag) {
 				model.movementFlag = true;
 			}
 		}
 		if (e.getKeyCode() == 74) {
-			System.out.println("J Key Released");
+			//System.out.println("J Key Released"); //uncomment to test to see is J key is being released
 			model.jumpFlag = false;
+			if (!Model.buttonFlag) {
+				model.movementFlag = true;
+			}
 		}
 		
 	}

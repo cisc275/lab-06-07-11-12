@@ -34,7 +34,6 @@ public class View extends JFrame {
 	final static int drawDelay = 60; //msec
 	final static int imgWidth = 165;
 	final static int imgHeight = 165;
-	static boolean buttFlag = false;
 	
 	DrawPanel drawPanel = new DrawPanel();
 	Action drawAction;
@@ -124,6 +123,7 @@ public class View extends JFrame {
 		}
 		return null;
 	}
+	//Reads in orc firing images
 	private BufferedImage createFireImage(String direction){
 		BufferedImage bufferedImage;
 		try {
@@ -134,6 +134,7 @@ public class View extends JFrame {
 		}
 		return null;
 	}
+	//reads orc jumping images
 	private BufferedImage createJumpImage(String direction){
 		BufferedImage bufferedImage;
 		try {
@@ -144,6 +145,7 @@ public class View extends JFrame {
 		}
 		return null;
 	}
+	//reads orc idling images
 	private BufferedImage createIdleImage(String direction){
 		BufferedImage bufferedImage;
 		try {
@@ -178,13 +180,11 @@ public class View extends JFrame {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.setColor(Color.gray);
-			
-			
 			if (Model.getMovement()) {
 				if (Model.jumpFlag) {
 					picNum = (picNum + 1) % 8;
 					g.drawImage(jumppics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);
-				}
+					}
 				else{
 					picNum = (picNum + 1) % frameCount;
 					g.drawImage(forwardpics[Model.getDirect().ordinal()][picNum], Model.getX(), Model.getY(), Color.gray, this);

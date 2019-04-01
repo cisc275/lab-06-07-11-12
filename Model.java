@@ -14,7 +14,7 @@ public class Model {
 	public static boolean movementFlag;
 	public static boolean fireFlag;
 	public static boolean jumpFlag;
-
+	public static boolean buttonFlag;
 	
 	//constructor
 	public Model(int width, int height, int imageWidth, int imageHeight) {
